@@ -1,12 +1,10 @@
+from azureml.core.authentication import ServicePrincipalAuthentication
+from core.CustomExceptions import HandleExceptions
+from azureml.core.webservice import AciWebservice, Webservice
+from azureml.core import Workspace
 import traceback
 import sys
-from operations import TopOperation
-from operations import JoinOperation
-from operations import AggregationOperation
-from operations import FormulaOperation
-from operations import FilterOperation
 from connectors import DBFSConnector
-from connectors import CosmosDBConnector
 from datatransformations import TranformationsMainFlow
 from automl import tpot_execution
 from core import PipelineNotification
@@ -30,7 +28,7 @@ except Exception as ex:
 	sys.exit(1)
 try: 
 	PipelineNotification.PipelineNotification().started_notification('5e85f6229723fb68fd4e52c7','5df78f4be2f2eff24740bbd7','http://13.68.212.36:3200/pipeline/notify')
-	BostonHousingPricesRegression_AutoML = tpot_execution.Tpot_execution.run(["5e85f6229723fb68fd4e52c6"],{"5e85f6229723fb68fd4e52c6": BostonHousingPricesRegression_AutoFE}, "5e85f6229723fb68fd4e52c7", spark,json.dumps( {"model_type": "classification", "label": "MEDV", "features": ["CRIM", "ZN", "INDUS", "CHAS", "NOX", "RM", "AGE", "DIS", "RAD", "TAX", "PTRATIO", "B", "LSTAT"], "percentage": "30", "executionTime": "5", "sampling": "0", "sampling_value": "none", "run_id": "", "model_id": "5e85f8999723fb68fd4e5346", "ProjectName": "ML Sample Problems", "PipelineName": "BostonHousingPricesRegression", "pipelineId": "5e85f6229723fb68fd4e52c4", "userid": "5df78f4be2f2eff24740bbd7", "runid": "", "url_ResultView": "http://13.68.212.36:3200", "experiment_id": "480623611921769"}))
+	BostonHousingPricesRegression_AutoML = tpot_execution.Tpot_execution.run(["5e85f6229723fb68fd4e52c6"],{"5e85f6229723fb68fd4e52c6": BostonHousingPricesRegression_AutoFE}, "5e85f6229723fb68fd4e52c7", spark,json.dumps( {"model_type": "classification", "label": "MEDV", "features": ["CRIM", "ZN", "INDUS", "CHAS", "NOX", "RM", "AGE", "DIS", "RAD", "TAX", "PTRATIO", "B", "LSTAT"], "percentage": "80", "executionTime": 10, "sampling": "0", "sampling_value": "none", "run_id": "1e16cc3c80ff4eb7bb1ef88318eca244", "model_id": "5e85fb919723fb68fd4e5371", "ProjectName": "ML Sample Problems", "PipelineName": "BostonHousingPricesRegression", "pipelineId": "5e85f6229723fb68fd4e52c4", "userid": "5df78f4be2f2eff24740bbd7", "runid": "1e16cc3c80ff4eb7bb1ef88318eca244", "url_ResultView": "http://13.68.212.36:3200", "experiment_id": "480623611921769"}))
 
 	PipelineNotification.PipelineNotification().completed_notification('5e85f6229723fb68fd4e52c7','5df78f4be2f2eff24740bbd7','http://13.68.212.36:3200/pipeline/notify')
 except Exception as ex: 
